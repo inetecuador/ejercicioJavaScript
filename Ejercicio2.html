@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        const inicio=[ "unacadena",3,9,1,10,500,1,10,true];
+        const inicio = [4, "unacadena", [6, 5, "cadena"], 3, 9, 1, 10, 500, 1, 10, true];
 
-    function FiltrarNumerosYOrdenar(arreglo) {
-        // filtrar
-        let arregloFiltrado = [];
-        for (let i = 0; i < arreglo.length; i++)
-            if (typeof arreglo[i] === "number")
-                arregloFiltrado.push(arreglo[i]);
+        function FiltrarNumeros(arreglo) {
+            let arregloFiltrado = [];
+            for (let i = 0; i < arreglo.length; i++)
+                if (typeof arreglo[i] === "number")
+                    arregloFiltrado.push(arreglo[i]);
+                else if (Array.isArray(arreglo[i]))
+                    arregloFiltrado = arregloFiltrado.concat(FiltrarNumeros(arreglo[i]));
+            return arregloFiltrado;
+        }
 
-        // ordenar de mayor a menor
-        for (let j = 0; j < arregloFiltrado.length - 1; j++)
-            for (let i = 0; i < arregloFiltrado.length - 1 - j; i++) {
-                let numeroActual = arregloFiltrado[i];
-                let numeroSiguiente = arregloFiltrado[i + 1];
-                if (numeroActual < numeroSiguiente) {
-                    arregloFiltrado[i] = numeroSiguiente;
-                    arregloFiltrado[i + 1] = numeroActual;
+        function FiltrarNumerosYOrdenar(arreglo) {
+            let arregloFiltrado = FiltrarNumeros(arreglo);
+
+            // ordenar de mayor a menor
+            for (let j = 0; j < arregloFiltrado.length - 1; j++)
+                for (let i = 0; i < arregloFiltrado.length - 1 - j; i++) {
+                    let numeroActual = arregloFiltrado[i];
+                    let numeroSiguiente = arregloFiltrado[i + 1];
+                    if (numeroActual < numeroSiguiente) {
+                        arregloFiltrado[i] = numeroSiguiente;
+                        arregloFiltrado[i + 1] = numeroActual;
+                    }
                 }
-            }
-        return arregloFiltrado;
-    }
-    console.log("" + FiltrarNumerosYOrdenar(inicio));
+            return arregloFiltrado;
+        }
+
+        console.log("" + FiltrarNumerosYOrdenar(inicio));
     </script>
 </body>
+
 </html>
