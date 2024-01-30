@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const numeroDeElementos = 10;
+        function Fibonacci(numero) {
+            let semilla = [0, 1];
+            if (numero < 1)
+                return [];
+
+            if (numero < 3) {
+                let resultado = [];
+                for (let i = 0; i < numero; i++)
+                    resultado.push(semilla[i]);
+                return resultado;
+            }
+            let resultado = semilla;
+            for (let i = 2; i < numero; i++) {
+                resultado.push(resultado[i - 2] + resultado[i - 1]);
+            }
+            return resultado;
+
+        }
+        console.log("" + Fibonacci(numeroDeElementos));
+
+    </script>
+</body>
+
+</html>
